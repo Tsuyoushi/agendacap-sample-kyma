@@ -42,9 +42,34 @@
         }
     },
     "cds": {
+        "build": {
+            "target": ".",
+            "tasks": [
+                {
+                    "src": "db",
+                    "for": "hana",
+                    "options": {
+                        "model": [
+                            "db",
+                            "srv"
+                        ]
+                    }
+                },
+                {
+                    "src": "db",
+                    "for": "node-cf",
+                    "options": {
+                        "model": [
+                            "db",
+                            "srv"
+                        ]
+                    }
+                }
+            ]
+        },
         "requires": {
             "db": {
-                "kind": "sql"
+                "kind": "hana"
             }
         },
         "hana": {

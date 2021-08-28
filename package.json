@@ -7,11 +7,17 @@
     "private": true,
     "dependencies": {
         "@sap/cds": "^5",
+        "@sap/xsenv": "^3.1.1",
+        "@sap/xssec": "^3.2.3",
         "express": "^4",
-        "hdb": "^0.18.3"
+        "hdb": "^0.18.3",
+        "passport": "^0.4.1"
     },
     "devDependencies": {
         "sqlite3": "^5.0.2"
+    },
+    "engines": {
+        "node": ">=14"
     },
     "scripts": {
         "start": "cds run"
@@ -56,7 +62,7 @@
                     }
                 },
                 {
-                    "src": "db",
+                    "src": "srv",
                     "for": "node-cf",
                     "options": {
                         "model": [

@@ -1,0 +1,15 @@
+{
+    "role": {
+        "name": "Role_OVP",
+        "object_privileges": [
+            {
+                "name": "SCHEDULE_SCHEDULETYPE",
+                "type": "TABLE",
+                "privileges": [
+                    "SELECT"
+                ]
+            }
+        ]
+    }
+    
+}

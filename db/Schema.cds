@@ -2,7 +2,8 @@ namespace schedule;
 
 using {
     Currency,
-    managed
+    managed,
+    cuid
 } from '@sap/cds/common';
 
 entity ScheduleType : managed {

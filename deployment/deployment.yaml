@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agendacap-sample
+  labels:
+    app: agendacap-sample
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agendacap-sample
+  template:
+    metadata:
+      labels:
+        app: agendacap-sample
+    spec:
+      containers:
+      - name: agendacap-sample
+        image: adrianotsuyoshi/agendacap-sample:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4004
+        resources:
+            limits:
+              ephemeral-storage: 256M
+              memory: 256M
+              cpu: 100m
+            requests:
+              cpu: 100m
+              ephemeral-storage: 256M
+              memory: 256M
+      imagePullSecrets:
+      - name: regcred
+status: {}
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: agendacap-sample
+spec:
+  selector:
+    app: agendacap-sample
+  ports:
+  - port: 8080
+    targetPort: 4004
+    protocol: TCP
+
+---
+
+apiVersion: gateway.kyma-project.io/v1alpha1
+kind: APIRule
+metadata:
+  name: agendacap-sample
+spec:
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  service:
+    name: agendacap-sample
+    port: 8080
+    host: agendacap-sample
+  rules:
+    - path: /.*
+      methods: ["GET"]
+      accessStrategies:
+        - handler: noop
+          config: {}
